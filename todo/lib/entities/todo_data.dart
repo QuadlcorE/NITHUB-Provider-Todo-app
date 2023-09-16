@@ -1,6 +1,11 @@
 class TodoData {
+  // int id;
   bool completed = false;
-  String? text;
+  String text;
 
-  TodoData(this.completed, this.text);
+  TodoData(this.text);
+
+  void strike() {
+    completed = completed ? false : true;
+  }
 }
