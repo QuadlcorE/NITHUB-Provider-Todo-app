@@ -139,7 +139,10 @@ class _SignInState extends State<SignIn> {
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              dynamic result = await _auth.signInAnon();
+                              dynamic result =
+                                  await _auth.signInWithEmailAndPassword(
+                                      _emailController.text,
+                                      _passwordController.text);
                               if (result == null) {
                                 print("Error signing in");
                               } else {

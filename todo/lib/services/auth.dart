@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo/models/user.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -19,6 +20,32 @@ class AuthService {
       final User? user = result.user;
       return user;
     } catch (e) {
+      Fluttertoast.showToast(
+          msg: "An error occurred: ${e.toString()}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          // textColor: Colors.white,
+          fontSize: 16.0);
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFireBaseUser(user);
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: "An error occurred: ${e.toString()}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          // textColor: Colors.white,
+          fontSize: 16.0);
       print(e.toString());
       return null;
     }
@@ -31,6 +58,13 @@ class AuthService {
       User? user = result.user;
       return _userFromFireBaseUser(user);
     } catch (e) {
+      Fluttertoast.showToast(
+          msg: "An error occurred: ${e.toString()}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          // textColor: Colors.white,
+          fontSize: 16.0);
       print(e.toString());
       return null;
     }
